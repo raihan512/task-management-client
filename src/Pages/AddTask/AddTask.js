@@ -1,14 +1,12 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-interface IFormInput {
-    task: String;
-}
+
 
 const AddTask = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
-    const onSubmit: SubmitHandler<IFormInput> = data => {
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const onSubmit = data => {
         fetch('http://localhost:5000/addtask', {
             method: "POST",
             headers: {
@@ -18,7 +16,6 @@ const AddTask = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.acknowledged) {
                     toast.success('Task Added SuccessFully');
                 }

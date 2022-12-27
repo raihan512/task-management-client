@@ -11,7 +11,7 @@ const Navbar = () => {
                         <div className='flex flex-wrap'>
                             <p className='text-lg font-serif font-medium ml-2 my-3'><Link className='p-2  rounded-sm bg-green-100 hover:bg-green-300' to='/'>Home</Link></p>
                             <p className='text-lg font-serif font-medium ml-2 my-3'><Link className='p-2  rounded-sm bg-green-100 hover:bg-green-300' to='/add-task'>Add Task</Link></p>
-                            <p className='text-lg font-serif font-medium ml-2 my-3'><Link className='p-2  rounded-sm bg-green-100 hover:bg-green-300' to='/'>My Task</Link></p>
+                            <p className='text-lg font-serif font-medium ml-2 my-3'><Link className='p-2  rounded-sm bg-green-100 hover:bg-green-300' to='/my-task'>My Task</Link></p>
                             <p className='text-lg font-serif font-medium ml-2 my-3'><Link className='p-2  rounded-sm bg-green-100 hover:bg-green-300' to='/'>Completed Task</Link></p>
                         </div>
                     </div>
