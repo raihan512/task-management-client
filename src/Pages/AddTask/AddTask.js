@@ -3,10 +3,12 @@ import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 import { useQuery } from '@tanstack/react-query';
 import { AuthProvider } from '../../Context/AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const AddTask = () => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthProvider);
     const userEmail = user.email;
     const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -33,6 +35,7 @@ const AddTask = () => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success('Task Added SuccessFully');
+                    navigate('/my-task');
                 }
             })
     };

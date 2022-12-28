@@ -15,6 +15,23 @@ const MyTask = () => {
             return data;
         }
     })
+    // Mark Complete task
+    const handleComplete = id => {
+        fetch(`http://localhost:5000/alltask/${id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Task Completed')
+                    refetch();
+                }
+            })
+            .catch(error => console.error(error))
+    }
     // Delete Current user task by id
     const handleDeleteTask = id => {
         fetch(`http://localhost:5000/alltask/${id}`, {
@@ -39,10 +56,11 @@ const MyTask = () => {
                 {/* Task Container */}
                 <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
                     {
-                        myTasks.map(task => <TaskItem
+                        myTasks.map(task => !(task.isComplete) && <TaskItem
                             key={task._id}
                             task={task}
                             handleDeleteTask={handleDeleteTask}
+                            handleComplete={handleComplete}
                         ></TaskItem>)
                     }
                 </div>
