@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const { signUpUser, updateUser } = useContext(AuthProvider);
+    const { signUpUser, SignUpGoogle, updateUser } = useContext(AuthProvider);
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
     const handleSignUp = data => {
@@ -20,6 +20,16 @@ const SignUp = () => {
             })
             .catch((error) => console.log(error));
     };
+
+    const handleGoogleSignUp = () => {
+        SignUpGoogle()
+            .then(res => {
+                const user = res.user;
+                addUser(user.displayName, user.email);
+                toast.success('User Added')
+            })
+            .catch(error => console.log(error))
+    }
 
     const addUser = (name, email) => {
         const user = { name, email }
@@ -58,6 +68,7 @@ const SignUp = () => {
                         <input type="password" className='text-sm  py-2 px-5 rounded-sm bg-gray-100 focus-within:outline-cyan-400' {...register("pass", { required: true })} placeholder="Ex:Tomorrow I will go to my versity" />
                         {errors.pass && <span className='text-red-500 font-serif'>You must have to add a password</span>}
                         <input className='text-base md:text-lg text-white font-serif cursor-pointer bg-cyan-400 py-1 px-5 rounded-sm mt-3 self-start' type="submit" value="Signup" />
+                        <button onClick={handleGoogleSignUp} className='py-2 bg-green-400 mt-2 rounded-sm text-lg font-serif text-white'>Continue With Google</button>
                         <p className='text-base font-serif mt-2'>Already have an account? <Link className='text-cyan-500' to='/signin'>Signin</Link> here</p>
                     </div>
                 </form>
