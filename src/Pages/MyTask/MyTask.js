@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthProvider } from "../../Context/AuthContext/AuthContext";
 import TaskItem from './TaskItem/TaskItem';
 const MyTask = () => {
+    const { user } = useContext(AuthProvider);
     const allTask = useLoaderData();
-
     return (
         <section className='flex flex-col max-width h-screen'>
             <div className=" mx-3">
-                <h3 className='text-2xl md:text-4xl font-serif font-semibold text-center my-5'>My Tasks</h3>
+                <h3 className='text-2xl md:text-4xl font-serif font-semibold text-center my-5'>{user.displayName}, your task</h3>
                 {/* Task Container */}
                 <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
                     {
